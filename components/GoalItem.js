@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import GoalInput from "./GoalInput";
 const GoalItem = (props) => {
   return (
     <View style={styles.listItem}>
