@@ -25,13 +25,26 @@ export default function App() {
     ]);
   };
 
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
+  };
+
   return (
     <View style={styles.screen}>
+      <Text style={styles.myTitle}>MY GOALS</Text>
       <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={courseGoals}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
       />
     </View>
   );
@@ -40,5 +53,15 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
+  },
+  myTitle: {
+    textAlign: "center",
+    fontSize: 40,
+    color: "white",
+    backgroundColor: "#ff4dff",
+    height: 55,
+    borderRadius: 5,
+    borderWidth: 1,
+    marginBottom: 10,
   },
 });
