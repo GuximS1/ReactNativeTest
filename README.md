@@ -1,1 +1,1 @@
-# A simple to do list or goals made with React-native (Javascript).
+# A simple to do list  made with React-native (Javascript).
