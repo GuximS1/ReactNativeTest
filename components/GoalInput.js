@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Modal,
+  Alert,
+} from "react-native";
 
 const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -11,27 +18,34 @@ const GoalInput = (props) => {
   const addGoalHandler = () => {
     props.onAddGoal(enteredGoal);
     setEnteredGoal("");
+    Alert.alert(
+      "NEW ITEM!",
+      "The new item ''" + enteredGoal + "'' has been added to the list!",
+      [{ text: "Submit", style: "cancel" }]
+    );
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Course Goal"
-          style={styles.input}
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="CANCEL" color="red" onPress={props.onCancel} />
-          </View>
-          <View style={styles.button}>
-            <Button title="ADD" onPress={addGoalHandler} />
+    <View>
+      <Modal visible={props.visible} animationType="slide" style={styles.page}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Course Goal"
+            style={styles.input}
+            onChangeText={goalInputHandler}
+            value={enteredGoal}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button title="CANCEL" color="red" onPress={props.onCancel} />
+            </View>
+            <View style={styles.button}>
+              <Button title="ADD" onPress={addGoalHandler} />
+            </View>
           </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </View>
   );
 };
 
@@ -56,6 +70,7 @@ const styles = StyleSheet.create({
   button: {
     width: "40%",
   },
+  page: { marginBottom: 150 },
 });
 
 export default GoalInput;
